@@ -9,8 +9,8 @@ import (
 	"time"
 
 	logf "github.com/cert-manager/cert-manager/pkg/logs"
-	"github.com/cert-manager/cert-manager/test/acme/dns"
-	"github.com/cert-manager/cert-manager/test/acme/dns/server"
+	"github.com/cert-manager/cert-manager/test/acme"
+	"github.com/cert-manager/cert-manager/test/acme/server"
 	"github.com/sockmister/cert-manager-webhook-inwx/test"
 	extapi "k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/v1"
 )
@@ -45,7 +45,7 @@ func TestRunSuite(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
@@ -96,7 +96,7 @@ func TestRunSuiteWithSecret(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
@@ -147,7 +147,7 @@ func TestRunSuiteWithTwoFA(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
@@ -198,7 +198,7 @@ func TestRunSuiteWithSecretAndTwoFA(t *testing.T) {
 		},
 	}
 
-	if err := srv.Run(ctx); err != nil {
+	if err := srv.Run(ctx, "udp"); err != nil {
 		t.Fatalf("failed to start test server: %v", err)
 	}
 	defer srv.Shutdown()
